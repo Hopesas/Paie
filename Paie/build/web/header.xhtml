@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"    
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <h:form>          
+            <b:navBar brand="Plan de Atención Integral de Enfermería" brandHref="#" inverse="true" fixed="top" fluid="true" >        
+                <b:navbarLinks pull="right">
+                    <b:navCommandLink value="Inicio" action="home.xhmtl?faces-redirect=true" iconAwesome="home"></b:navCommandLink>
+                    <b:dropMenu value="Menu" iconAwesome="book" iconAlign="left">
+                        <b:navLink header="Planes"></b:navLink>
+                        <b:navCommandLink value="Crear Plan" action="paciente.xhmtl?faces-redirect=true" ></b:navCommandLink>
+                        <b:navCommandLink value="Mis Planes" action="misPlanes.xhtml?faces-redirect=true" ></b:navCommandLink>
+                        <b:navLink header="Escalas"></b:navLink>
+                        <b:navCommandLink value="Escala Valoración Riesgo de Caídas Adulto" action="escalaAdultos.xhtml?faces-redirect=true" ></b:navCommandLink>
+                        <b:navCommandLink value="Escala Valoración Riesgo de Caídas Pediatrico (0 - 14 años)" action="escalaNinos.xhtml?faces-redirect=true" ></b:navCommandLink>
+                        <b:navCommandLink value="Escala Valoración Riesgo de Ulceras por Presión"></b:navCommandLink>
+                    </b:dropMenu> 
+                    <b:navCommandLink value="Buscar Plan" action="paie.xhtml?faces-redirect=true" iconAwesome="search" iconAlign="left"></b:navCommandLink>
+                    <b:dropMenu value="#{LogoutBean.displayName(request)}" iconAwesome="user" iconAlign="right">                    
+                        <b:navCommandLink value="Salir" action="#{LogoutBean.logout(request)}"></b:navCommandLink>                        
+                    </b:dropMenu>
+                </b:navbarLinks>
+            </b:navBar>  
+        </h:form>                         
+    </h:head> 
+</html>

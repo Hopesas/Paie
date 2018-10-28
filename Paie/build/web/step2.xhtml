@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <ui:insert name="header" >
+            <ui:include src="header.xhtml" />
+        </ui:insert>
+        <title>Plan de Atención Integral</title>
+    </h:head>
+    <h:body  style="background-color: #eeeeee; margin-top: 100px;">
+       <h:panelGroup id="formNanda">
+           <p:dataTable id="patternsTable" var="nanda" value="#{NandaBean.nandaList}"
+                        selection="#{NandaBean.selectedNanda}" selectionMode="single" rowKey="#{nanda.codigo}" >
+                    
+                <p:ajax event="rowSelect" listener="#{NandaBean.onRowSelect}"/>
+               
+                <f:facet id="titulo" name="header" >
+                    Diagnónstico de Enfermería
+                </f:facet>
+
+                <p:column headerText="Código" width="8%">
+                    #{nanda.codigo}
+                </p:column>
+
+                <p:column headerText="Diagnóstico" width="30%">
+                    #{nanda.diagnostico}
+                </p:column>
+                
+                <p:column headerText="Descripción">
+                    #{nanda.descripcion}
+                </p:column>
+            </p:dataTable>
+        </h:panelGroup>
+        <div align="center">
+            <h:form>
+                <p:commandButton styleClass="btn btn-primary" id="continueBtn2" value="Continuar" action="#{NandaBean.continueStepTwo()}"></p:commandButton>
+                <p:commandButton styleClass="btn btn-primary" id="backBtn2" value="Volver" action="#{NandaBean.backStepOne()}"></p:commandButton>
+            </h:form>
+        </div>
+        <p:dialog id="errorDlg" header="Error" widgetVar="errorDialog" modal="true" appendTo="@(body)"
+                  showEffect="explode" hideEffect="explode" >
+            <h:form>
+                <h:outputText value="Por favor seleccione un Diagnóstico" /><br/>
+                <p:commandButton value="Ok" style="float: right" onclick="errorDialog.hide()"/>
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <ui:insert name="header" >
+            <ui:include src="header.xhtml" />
+        </ui:insert>
+        <title>Plan de Atención Integral</title>
+        <style type="text/css">
+              .ui-chkbox-all {
+                  visibility: hidden;
+              }
+              .ui-datatable tbody td.wrap {
+                    white-space: normal;
+                }
+        </style>
+    </h:head>
+    <h:body  style="background-color: #eeeeee; margin-top: 90px;">
+       <h:panelGroup id="formFeature">
+           <p:dataTable id="featureTable" var="caracteristicas" value="#{FeatureFactorBean.caracteristicasList}"
+                        selection="#{FeatureFactorBean.selectedCaracteristicas}" rowKey="#{caracteristicas.id}" 
+                        emptyMessage="El Diagnóstico no posee Características">
+
+                <p:ajax event="rowSelect" listener="#{FeatureFactorBean.onRowSelectCaracteristicasOut}"/>
+                <p:ajax event="rowSelectCheckbox" listener="#{FeatureFactorBean.onRowSelectCaracteristicas}"/>
+                <p:ajax event="rowUnselectCheckbox" listener="#{FeatureFactorBean.onRowUnselectCaracteristicas}"/>
+                
+                <f:facet id="titulo" name="header">
+                    Caracteristicas Definitorias
+                </f:facet>
+                
+               <p:column selectionMode="multiple" style="width:2%" />  
+                
+                <p:column headerText="Código">
+                    #{caracteristicas.id}
+                </p:column>
+
+                <p:column headerText="Definición">
+                    #{caracteristicas.definicion}
+                </p:column>
+            </p:dataTable>
+        </h:panelGroup>
+        
+        <h:panelGroup id="formFactor">
+            <p:dataTable id="factorTable" var="factores" value="#{FeatureFactorBean.factoresList}"
+                         selection="#{FeatureFactorBean.selectedFactores}" rowKey="#{factores.id}" >
+                <p:ajax event="rowSelect" listener="#{FeatureFactorBean.onRowSelectFactorsOut}"/>
+                <p:ajax event="rowSelectCheckbox" listener="#{FeatureFactorBean.onRowSelectFactores}"/>
+                <p:ajax event="rowUnselectCheckbox" listener="#{FeatureFactorBean.onRowUnselectFactores}"/>
+               
+                <f:facet id="titulo" name="header">
+                    Factores Relacionados
+                </f:facet>
+
+                <p:column selectionMode="multiple" style="width:2%" />  
+                
+                <p:column headerText="Código">
+                    #{factores.id}
+                </p:column>
+
+                <p:column headerText="Definición"  styleClass="wrap">
+                    #{factores.factorRelacionado}
+                </p:column>
+            </p:dataTable>
+        </h:panelGroup>
+        <div align="center">
+            <h:form>
+                <p:commandButton styleClass="btn btn-primary" id="continueBtn3" value="Continuar" action="#{FeatureFactorBean.continueStepThree()}"></p:commandButton>
+                <p:commandButton styleClass="btn btn-primary" id="backBtn3" value="Volver" action="#{FeatureFactorBean.backStepTwo()}"></p:commandButton>
+            </h:form>
+        </div>
+    </h:body>
+</html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <ui:insert name="header" >
+            <ui:include src="header.xhtml" />
+        </ui:insert>
+        <title>Plan de Atención Integral</title>
+    </h:head>
+    <h:body  style="background-color: #eeeeee; margin-top: 100px;">
+        <h:panelGroup id="formPatterns">
+            <p:dataTable id="patternsTable" var="pattern" value="#{PatternsBean.patronList}"
+                     selection="#{PatternsBean.selectedPattern}" selectionMode="single" rowKey="#{pattern.id}" >
+                    
+                <p:ajax event="rowSelect" listener="#{PatternsBean.onRowSelect}"/>
+               
+                <f:facet id="titulo" name="header">
+                    Patrones Funcionales
+                </f:facet>
+
+                <p:column headerText="Numero" width="5%">
+                    #{pattern.id}
+                </p:column>
+
+                <p:column headerText="Descripción" width="15%">
+                    #{pattern.descripcion}
+                </p:column>
+
+                <p:column headerText="Definición">
+                    #{pattern.definicion}
+                </p:column>
+            </p:dataTable>
+        </h:panelGroup>
+        <div align="center">
+            <h:form>
+                <p:commandButton styleClass="btn btn-primary" id="continueBtn1" value="Continuar" action="#{PatternsBean.continueStepOne()}"></p:commandButton>
+            </h:form>
+        </div>
+        <p:dialog id="errorDlg" header="Error" widgetVar="errorDialog" modal="true" appendTo="@(body)"
+                  showEffect="explode" hideEffect="explode" >
+            <h:form>
+                <h:outputText value="Por favor seleccione un Patrón Funcional" /><br/>
+                <p:commandButton value="Ok" style="float: right" onclick="errorDialog.hide()"/>
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>

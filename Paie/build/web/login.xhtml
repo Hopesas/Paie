@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>PAIE</title>
+        <meta name="author" content="Hope Systems"></meta>
+        <style type="text/css">
+            .form-signin {
+                margin: 0 auto;
+                max-width: 330px;
+                padding: 15px;
+            }
+        </style>
+    </h:head>
+    <h:body style="padding-top: 60px;">
+        <b:navBar brand="Plan de Atención Integral de Enfermería" inverse="true" fixed="top" fluid="true">        
+        </b:navBar>        
+        <b:container>
+            <b:row style="background: #FFF; opacity: 0.8;">
+                    <b:image col-xs="4" col-sm="4" col-md="4" library="img"
+                            name="logomontserrat.jpg" />
+                    <b:image col-xs="4" col-sm="4" col-md="4" library="img"
+                            name="LogoPAIE.png" />
+                    <b:column col-xs="4" col-sm="4" col-md="4">
+                    </b:column>
+            </b:row>         
+            <b:row>            
+            <h:form styleClass="form-signin" prependId="false" id="form">
+                <b:inputText id="email" placeholder="Usuario" value="#{LoginBean.nombre}">
+                    <f:facet name="prepend">
+                        <b:icon name="user" />
+                    </f:facet>
+                </b:inputText>
+                <b:inputText id="password" placeholder="Contraseña" type="password" value="#{LoginBean.password}">
+                    <f:facet name="prepend">
+                        <b:iconAwesome name="key" />
+                    </f:facet>
+                </b:inputText>
+                <b:commandButton look="primary btn-block" value="Ingresar" icon="log-in" size="lg" action="#{LoginBean.login(request)}" update="form"/>
+            </h:form>
+            </b:row>
+            <p:messages id="loginMessage" showDetail="false" closable="true"/>                  
+        </b:container>
+    </h:body>
+</html>
